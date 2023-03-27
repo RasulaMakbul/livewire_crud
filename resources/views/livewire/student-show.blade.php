@@ -14,6 +14,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Student Crud Application
+                            <input type="search" class="form-control float-end mx-3" placeholder=" Type here to search" wire:model="search" style="width: 230px;">
                             <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#creatStudentModal">
                                 Add New Student
                             </button>
@@ -21,6 +22,7 @@
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
+
                             <thead>
                                 <th>SL</th>
                                 <th>Name</th>
@@ -39,7 +41,10 @@
                                         <button type="button" class="btn btn-warning" wire:click="editStudent({{$item->id}})" data-bs-toggle="modal" data-bs-target="#updateStudentModal">
                                             Edit
                                         </button>
-                                        <a href="" class="btn btn-danger">Delete</a>
+                                        <button type="button" class="btn btn-danger" wire:click="deleteStudent({{$item->id}})" data-bs-toggle="modal" data-bs-target="#deleteStudentModal">
+                                            Delete
+                                        </button>
+
                                     </td>
                                 </tr>
 

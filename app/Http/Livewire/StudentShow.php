@@ -67,6 +67,21 @@ class StudentShow extends Component
         $this->resetInput();
         $this->dispatchBrowserEvent('close-modal');
     }
+
+    public function deleteStudent(int $id)
+    {
+        $this->student_id = $id;
+    }
+
+    public function destroyStudent()
+    {
+        $student = Students::find($this->student_id)->delete();
+
+        session()->flash('success_message', 'Student deleted Successfully!');
+        $this->resetInput();
+        $this->dispatchBrowserEvent('close-modal');
+    }
+
     public function closeModal()
     {
         $this->resetInput();
@@ -80,7 +95,7 @@ class StudentShow extends Component
 
     public function render()
     {
-        $students = Students::orderBy('id', 'DESC')->paginate(10);
+        $students = Students::orWhere('name', 'like', '%' . $this->search . '%')->orWhere('email', 'like', '%' . $this->search . '%')->orWhere('course', 'like', '%' . $this->search . '%')->orderBy('id', 'DESC')->paginate(10);
         return view('livewire.student-show', ['students' => $students]);
     }
 }
